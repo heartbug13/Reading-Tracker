@@ -18,6 +18,24 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         String userInput;
         customerList.add(new Customer("C100", "Jess", "Day", "jday@gmail.com", "317-331-7127", "loves dogs"));
+        customerList.add(new Customer("C101", "Winston", "Bishop", "wbishop@gmail.com", "317-710-0420", "is obsessed with cats"));
+
+        adoptionList.add(new Adoption("A100", "P100", "C100", "10-01-2024", "agrees to care for the dog Mario",25.00));
+        adoptionList.add(new Adoption("A101", "P101", "C101", "01-25-2004", "agrees to care for the cat Ferguson", 30.00));
+
+        petList.add(new Pet_Available("P00", "E002", "Mario", "07-20-2020", "dog", "white and brown dog with dark brown eyes"));
+        petList.add(new Pet_Available("P101", "E001", "Ferguson", "05-19-2000", "cat", "white and gray cat with brown eyes"));
+
+        petVaccineList.add(new Pet_Vaccination("E100", "V100", "P100", "06-19-2021", "06-19-2022", "none"));
+        petVaccineList.add(new Pet_Vaccination("E101", "V101", "P101", "06-19-2002", "06-19-2003", "none"));
+
+        caretakerList.add(new Caretaker("E100", "Cee", "Parekh", "cpariak@gmail.com", "111-111-1111"));
+        caretakerList.add(new Caretaker("E101", "Winston", "Schmidt", "cpariak@gmail.com", "111-111-1111"));
+
+        vaccineList.add(new Vaccine("V100", "fake name 1", "dog", "01-20-2022", 10, 0.5));
+        vaccineList.add(new Vaccine("V101", "fake name 1", "cat", "01-20-2003", 10, 1));
+
+
 
         do {
             System.out.println(line);
@@ -292,7 +310,9 @@ public class Main {
     }
 
     public static void printCareTaker() {
-
+        for (Caretaker caretaker : caretakerList) {
+            System.out.println(caretaker);
+        }
     }
 
     public static void createPet() {
@@ -316,13 +336,9 @@ public class Main {
     }
 
     public static void printPet() {
-        Scanner scan = new Scanner(System.in);
-        String userInput = "";
-        do {
-            System.out.println(line);
-
-            userInput = scan.nextLine();
-        } while (!userInput.equals("y"));
+        for (Pet_Available pet : petList) {
+            System.out.println(pet);
+        }
     }
 
     public static void createVaccine() {
@@ -346,13 +362,9 @@ public class Main {
     }
 
     public static void printVaccine() {
-        Scanner scan = new Scanner(System.in);
-        String userInput = "";
-        do {
-            System.out.println(line);
-
-            userInput = scan.nextLine();
-        } while (!userInput.equals("y"));
+        for (Vaccine vaccine : vaccineList) {
+            System.out.println(vaccine);
+        }
     }
 
     public static void createAdoption() {
@@ -376,13 +388,9 @@ public class Main {
     }
 
     public static void printAdoption() {
-        Scanner scan = new Scanner(System.in);
-        String userInput = "";
-        do {
-            System.out.println(line);
-
-            userInput = scan.nextLine();
-        } while (!userInput.equals("y"));
+        for (Adoption adoption : adoptionList) {
+            System.out.println(adoption);
+        }
     }
 
     public static void createPetVaccination()  {
@@ -406,7 +414,9 @@ public class Main {
     }
 
     public static void printPetVaccination() {
-
+        for (Pet_Vaccination petVaccination : petVaccineList) {
+            System.out.println(petVaccination);
+        }
     }
 }
 
