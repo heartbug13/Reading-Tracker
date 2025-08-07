@@ -1,5 +1,6 @@
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -17,6 +18,7 @@ public class Main {
 
         Scanner scan = new Scanner(System.in);
         String userInput;
+
         customerList.add(new Customer("C100", "Jess", "Day", "jday@gmail.com", "317-331-7127", "loves dogs"));
         customerList.add(new Customer("C101", "Winston", "Bishop", "wbishop@gmail.com", "317-710-0420", "is obsessed with cats"));
 
@@ -69,7 +71,7 @@ public class Main {
                         } else if (userInput.equals("C")) {
                             printCustomer();
                         }
-                    } while (!(userInput.equals("C")));
+                    } while (!(userInput.equals("D")));
                     break;
 
                 case "2":
@@ -88,7 +90,7 @@ public class Main {
                         } else if (userInput.equals("C")) {
                             printPet();
                         }
-                    } while (!(userInput.equals("C")));
+                    } while (!(userInput.equals("D")));
                     break;
                 case "3":
                     do {
@@ -106,7 +108,7 @@ public class Main {
                         } else if (userInput.equals("C")) {
                             printCareTaker();
                         }
-                    } while (!(userInput.equals("C")));
+                    } while (!(userInput.equals("D")));
                     break;
                 case "4":
                     do {
@@ -124,7 +126,7 @@ public class Main {
                         } else if (userInput.equals("C")) {
                             printVaccine();
                         }
-                    } while (!(userInput.equals("C")));
+                    } while (!(userInput.equals("D")));
                     break;
                 case "5":
                     do {
@@ -142,7 +144,7 @@ public class Main {
                         } else if (userInput.equals("C")) {
                             printAdoption();
                         }
-                    } while (!(userInput.equals("C")));
+                    } while (!(userInput.equals("D")));
                     break;
                 case "6":
                     do {
@@ -160,7 +162,7 @@ public class Main {
                         } else if (userInput.equals("C")) {
                             printPetVaccination();
                         }
-                    } while (!(userInput.equals("C")));
+                    } while (!(userInput.equals("D")));
                     break;
                 case "7":
                     break;
@@ -184,6 +186,7 @@ public class Main {
         String customerEmail;
         String customerPhone;
         String reasonForAdopting;
+
         do {
             System.out.println(line);
             System.out.println("Please enter the Customer ID:");
@@ -292,11 +295,39 @@ public class Main {
     public static void createCareTaker() {
         Scanner scan = new Scanner(System.in);
         String userInput = "";
+
+        String caretakerEmployeeID;
+        String caretakerFirstName;
+        String caretakerLastName;
+        String caretakerEmail;
+        String caretakerPhone;
+
         do {
             System.out.println(line);
+            System.out.println("Please enter the employee ID:");
+            caretakerEmployeeID = scan.nextLine();
+            System.out.println("Please enter the first name");
+            caretakerFirstName = scan.nextLine();
+            System.out.println("Please enter the last name");
+            caretakerLastName = scan.nextLine();
+            System.out.println("Please enter the email");
+            caretakerEmail = scan.nextLine();
+            System.out.println("Please enter the phone");
+            caretakerPhone = scan.nextLine();
+
+            System.out.println("Please verify all the information entered");
+            System.out.printf("Employee ID:   %s\n", caretakerEmployeeID);
+            System.out.printf("First Name:    %s\n", caretakerFirstName);
+            System.out.printf("Last Name:     %s\n", caretakerLastName);
+            System.out.printf("Email:         %s\n", caretakerEmail);
+            System.out.printf("Phone:         %s\n", caretakerPhone);
+
+            System.out.println("If the information is correct please enter y, if not please enter n");
 
             userInput = scan.nextLine();
         } while (!userInput.equals("y"));
+
+        caretakerList.add(new Caretaker(caretakerEmployeeID, caretakerFirstName, caretakerLastName, caretakerEmail, caretakerPhone));
     }
 
     public static void editCareTaker() {
@@ -318,11 +349,42 @@ public class Main {
     public static void createPet() {
         Scanner scan = new Scanner(System.in);
         String userInput = "";
+
+        String petID;
+        String employeeID;
+        String petName;
+        String dateOfBirth;
+        String typeOfPet;
+        String description;
+
         do {
             System.out.println(line);
+            System.out.println("Please enter the pet ID");
+            petID = scan.nextLine();
+            System.out.println("Please enter the employee ID");
+            employeeID = scan.nextLine();
+            System.out.println("Please enter the pet name");
+            petName = scan.nextLine();
+            System.out.println("Please enter the date of birth");
+            dateOfBirth = scan.nextLine();
+            System.out.println("Please enter the type of pet");
+            typeOfPet = scan.nextLine();
+            System.out.println("Please enter the description of the animal");
+            description = scan.nextLine();
+
+            System.out.println("Please verify all the information entered");
+            System.out.printf("Pet ID:         %s\n", petID);
+            System.out.printf("Employee ID:    %s\n", employeeID);
+            System.out.printf("Pet Name:       %s\n", petName);
+            System.out.printf("Date of Birth:  %s\n", dateOfBirth);
+            System.out.printf("Description:    %s\n", description);
+
+            System.out.println("If the information is correct please enter y, if not please enter n");
 
             userInput = scan.nextLine();
         } while (!userInput.equals("y"));
+
+        petList.add(new Pet_Available(petID, employeeID, petName, dateOfBirth, typeOfPet, description));
     }
 
     public static void editPet() {
@@ -344,11 +406,64 @@ public class Main {
     public static void createVaccine() {
         Scanner scan = new Scanner(System.in);
         String userInput = "";
+
+        String vaccineID;
+        String nameOfVaccine;
+        String typeOfPet;
+        String expirationDate;
+        double weightRequirement = 0;
+        double dosageMl = 0;
+
         do {
             System.out.println(line);
+            System.out.println("Please enter the vaccine ID");
+            vaccineID = scan.nextLine();
+            System.out.println("Please enter the name of vaccine");
+            nameOfVaccine = scan.nextLine();
+            System.out.println("Please enter the type of pet");
+            typeOfPet = scan.nextLine();
+            System.out.println("Please enter the expiration date");
+            expirationDate = scan.nextLine();
+            System.out.println("Please enter the weight requirement");
+            boolean isValid = false;
+            while (!isValid) {
+                try {
+                    weightRequirement = scan.nextDouble();
+                    isValid = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("Please enter a valid number");
+                }
+                scan.nextLine();
+            }
+            System.out.println("Please enter the dosage ml");
+
+            isValid = false;
+
+            while (!isValid) {
+                try {
+                    dosageMl = scan.nextDouble();
+                    isValid = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("Please enter a valid number");
+                }
+                scan.nextLine();
+            }
+
+            System.out.println("Please verify all the information entered");
+            System.out.printf("Vaccine ID:     %s\n", vaccineID);
+            System.out.printf("Vaccine Name:   %s\n", nameOfVaccine);
+            System.out.printf("Type of Pet:    %s\n", typeOfPet);
+            System.out.printf("Exp Date:       %s\n", expirationDate);
+            System.out.printf("Weight Req:     %s\n", weightRequirement);
+            System.out.printf("Dosage ML:      %s\n", dosageMl);
+
+
+            System.out.println("If the information is correct please enter y, if not please enter n");
 
             userInput = scan.nextLine();
         } while (!userInput.equals("y"));
+
+        vaccineList.add(new Vaccine(vaccineID, nameOfVaccine, typeOfPet, expirationDate, weightRequirement, dosageMl));
     }
 
     public static void editVaccine() {
@@ -370,11 +485,54 @@ public class Main {
     public static void createAdoption() {
         Scanner scan = new Scanner(System.in);
         String userInput = "";
+
+        String adoptionID;
+        String petID;
+        String customerID;
+        String pickUpDate;
+        String adoptionAgreement;
+        double adoptionCost = 0;
+
         do {
             System.out.println(line);
+            System.out.println("Please enter the adoption ID");
+            adoptionID = scan.nextLine();
+            System.out.println("Please enter the pet ID");
+            petID = scan.nextLine();
+            System.out.println("Please enter the customer ID");
+            customerID = scan.nextLine();
+            System.out.println("Please enter the pick up date");
+            pickUpDate = scan.nextLine();
+            System.out.println("Please enter the adoption agreement");
+            adoptionAgreement = scan.nextLine();
+            System.out.println("Please enter the adoptionCost");
+
+            boolean isValid = false;
+
+            while (!isValid) {
+                try {
+                    adoptionCost = scan.nextDouble();
+                    isValid = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("Please enter a valid number");
+                }
+                scan.nextLine();
+            }
+
+            System.out.println("Please verify all the information entered");
+            System.out.printf("Adoption ID:  %s\n", adoptionID);
+            System.out.printf("Pet ID:       %s\n", petID);
+            System.out.printf("Customer ID:  %s\n", customerID);
+            System.out.printf("Pickup Date:  %s\n", pickUpDate);
+            System.out.printf("Adoption Agr: %s\n", adoptionAgreement);
+            System.out.printf("Adoption Cos: %s\n", adoptionCost);
+
+            System.out.println("If the information is correct please enter y, if not please enter n");
 
             userInput = scan.nextLine();
         } while (!userInput.equals("y"));
+
+        adoptionList.add(new Adoption(adoptionID, petID, customerID, pickUpDate, adoptionAgreement, adoptionCost));
     }
 
     public static void editAdoption() {
@@ -396,11 +554,43 @@ public class Main {
     public static void createPetVaccination()  {
         Scanner scan = new Scanner(System.in);
         String userInput = "";
+
+        String employeeID;
+        String vaccineID;
+        String petID;
+        String dateAdministered;
+        String nextDueDate;
+        String notes;
+
         do {
             System.out.println(line);
+            System.out.println("Please enter the employee ID");
+            employeeID = scan.nextLine();
+            System.out.println("Please enter the vaccine ID");
+            vaccineID = scan.nextLine();
+            System.out.println("Please enter the petID");
+            petID = scan.nextLine();
+            System.out.println("Please enter the date administered");
+            dateAdministered = scan.nextLine();
+            System.out.println("Please enter the next due date");
+            nextDueDate = scan.nextLine();
+            System.out.println("Please enter the notes");
+            notes = scan.nextLine();
+
+            System.out.println("Please verify all the information entered");
+            System.out.printf("Employee ID:    %s\n", employeeID);
+            System.out.printf("Vaccine ID:     %s\n", vaccineID);
+            System.out.printf("Pet ID:         %s\n", petID);
+            System.out.printf("Date Admin:     %s\n", dateAdministered);
+            System.out.printf("Next Due Date:  %s\n", nextDueDate);
+            System.out.printf("Notes:          %s\n", notes);
+
+            System.out.println("If the information is correct please enter y, if not please enter n");
 
             userInput = scan.nextLine();
         } while (!userInput.equals("y"));
+
+        petVaccineList.add(new Pet_Vaccination(employeeID, vaccineID, petID, dateAdministered, nextDueDate, notes));
     }
 
     public static void editPetVaccination() {

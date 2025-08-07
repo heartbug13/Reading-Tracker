@@ -48,7 +48,7 @@ public class Caretaker {
     }
 
     public String toString() {
-        return String.format("%s\n\t%s\n\t%s\n\t%s\n\t%s\n", employeeID, firstName, lastName, email, phone);
+        return String.format("%s\n\t%s\n\t%s\n\t%s\n\t%s", employeeID, firstName, lastName, email, phone);
     }
 
 

@@ -55,6 +55,6 @@ public class Vaccine {
     }
 
     public String toString() {
-        return String.format("%s\n\t%s\n\t%s\n\t%s\n\t%.1f\n\t%.1f\n", vaccineID, nameOfVaccine, typeOfPet, expirationDate, weightRequirement, dosageMl);
+        return String.format("%s\n\t%s\n\t%s\n\t%s\n\t%.1f\n\t%.1f", vaccineID, nameOfVaccine, typeOfPet, expirationDate, weightRequirement, dosageMl);
     }
 }
