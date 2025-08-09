@@ -52,7 +52,7 @@ public class Adoption {
     }
 
     public String toString() {
-        return String.format("%s %s %s\n\t%s\n\t%s\n\t%d", adoptionID, customerID, petID, pickUpDate, adoptionAgreement, adoptionCost);
+        return String.format("%s %s %s\n\t%s\n\t%s\n\t%.1f", adoptionID, customerID, petID, pickUpDate, adoptionAgreement, adoptionCost);
     }
 
 }

@@ -23,6 +23,10 @@ public class Pet_Available {
         return this.employeeID;
     }
 
+    public void setEmployeeID(String employeeID) {
+        this.employeeID = employeeID;
+    }
+
     public String getPetName() {
         return this.petName;
     }

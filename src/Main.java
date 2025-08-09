@@ -25,7 +25,7 @@ public class Main {
         adoptionList.add(new Adoption("A100", "P100", "C100", "10-01-2024", "agrees to care for the dog Mario",25.00));
         adoptionList.add(new Adoption("A101", "P101", "C101", "01-25-2004", "agrees to care for the cat Ferguson", 30.00));
 
-        petList.add(new Pet_Available("P00", "E002", "Mario", "07-20-2020", "dog", "white and brown dog with dark brown eyes"));
+        petList.add(new Pet_Available("P100", "E002", "Mario", "07-20-2020", "dog", "white and brown dog with dark brown eyes"));
         petList.add(new Pet_Available("P101", "E001", "Ferguson", "05-19-2000", "cat", "white and gray cat with brown eyes"));
 
         petVaccineList.add(new Pet_Vaccination("E100", "V100", "P100", "06-19-2021", "06-19-2022", "none"));
@@ -228,15 +228,12 @@ public class Main {
             String cusID = scan.nextLine();
             int index = -1;
             do {
-                for (int i = 0; i < customerList.size(); i++) {
-                    if (customerList.get(i).getCustomerID().equals(cusID)) {
-                        index = i;
-                    }
-                }
+                index = findCustomer(cusID);
+                System.out.println(index);
                 if (index == -1) {
-                    System.out.println("Please enter a valid Customer ID, if you wish to exit please enter Y");
-                    cusID = scan.nextLine().toUpperCase();
-                    if (cusID.equals("Y")) {
+                    System.out.println("Please enter a valid Customer ID, if you wish to exit please enter y");
+                    cusID = scan.nextLine().toLowerCase();
+                    if (cusID.equals("y")) {
                         return;
                     }
                 }
@@ -279,7 +276,9 @@ public class Main {
                         customerList.get(index).setReasonForAdopting(newVal);
                         break;
                     default:
-                        System.out.println("Please enter a valid option");
+                        if (!userInput.equals("6")) {
+                            System.out.println("Please enter a valid input");
+                        }
                 }
 
             } while (!userInput.equals("6"));
@@ -333,11 +332,63 @@ public class Main {
     public static void editCareTaker() {
         Scanner scan = new Scanner(System.in);
         String userInput = "";
+
+        System.out.println(line);
+        System.out.println("Please enter the employee ID of the caretaker you are looking for");
+        String empID = scan.nextLine();
+        int index = -1;
+
+        do {
+            index = findCaretaker(empID);
+            if (index == -1) {
+                System.out.println("Please enter a valid employee ID, if you wish to exit please enter y");
+                empID = scan.nextLine().toLowerCase();
+                if (empID.equals("y")) {
+                    return;
+                }
+            }
+        } while (index == -1);
+
         do {
             System.out.println(line);
+            System.out.println("Which element would you like to change for the caretaker");
+            System.out.println("1. First Name");
+            System.out.println("2. Last Name");
+            System.out.println("3. Email");
+            System.out.println("4. Phone");
+            System.out.println("5. Exit");
 
             userInput = scan.nextLine();
-        } while (!userInput.equals("y"));
+            String newVal;
+
+            switch(userInput) {
+                case "1":
+                    System.out.println("Please enter the new first name");
+                    newVal = scan.nextLine();
+                    caretakerList.get(index).setFirstName(newVal);
+                    break;
+                case "2":
+                    System.out.println("Please enter the new last name");
+                    newVal = scan.nextLine();
+                    caretakerList.get(index).setLastName(newVal);
+                    break;
+                case "3":
+                    System.out.println("Please enter the new email");
+                    newVal = scan.nextLine();
+                    caretakerList.get(index).setEmail(newVal);
+                    break;
+                case "4":
+                    System.out.println("Please enter the new phone number");
+                    newVal = scan.nextLine();
+                    caretakerList.get(index).setPhone(newVal);
+                    break;
+                default:
+                    if (!userInput.equals("5")) {
+                        System.out.println("Please enter a valid input");
+                    }
+            }
+
+        } while (!userInput.equals("5"));
     }
 
     public static void printCareTaker() {
@@ -390,11 +441,70 @@ public class Main {
     public static void editPet() {
         Scanner scan = new Scanner(System.in);
         String userInput = "";
+
+        System.out.println(line);
+        System.out.println("Please enter the pet ID of the animal you are looking for");
+        String petID = scan.nextLine();
+
+        int index = -1;
+        do {
+            System.out.println(index);
+            System.out.println(petID);
+            index = findPet(petID);
+            System.out.println(index);
+            if (index == -1) {
+                System.out.println("Please enter a valid pet ID, if you wish to exit please enter u");
+                petID = scan.nextLine().toLowerCase();
+
+                if (petID.equals("y")) {
+                    return;
+                }
+            }
+        } while (index == -1);
         do {
             System.out.println(line);
-
+            System.out.println("Which element would you like to change for the pet");
+            System.out.println("1. Employee ID");
+            System.out.println("2. Pet Name");
+            System.out.println("3. Date of Birth");
+            System.out.println("4. Type of Pet");
+            System.out.println("5. Description");
+            System.out.println("6. Exit");
             userInput = scan.nextLine();
-        } while (!userInput.equals("y"));
+            String newVal;
+            switch(userInput) {
+                case "1":
+                    System.out.println("Please enter the new employee ID");
+                    newVal = scan.nextLine();
+                    petList.get(index).setEmployeeID(newVal);
+                    break;
+                case "2":
+                    System.out.println("Please enter the new pet name");
+                    newVal = scan.nextLine();
+                    petList.get(index).setPetName(newVal);
+                    break;
+                case "3":
+                    System.out.println("Please enter the new date of birth");
+                    newVal = scan.nextLine();
+                    petList.get(index).setDateOfBirth(newVal);
+                    break;
+                case "4":
+                    System.out.println("Please enter the new type of pet");
+                    newVal = scan.nextLine();
+                    petList.get(index).setTypeOfPet(newVal);
+                    break;
+                case "5":
+                    System.out.println("Please enter the new description");
+                    newVal = scan.nextLine();
+                    petList.get(index).setDescription(newVal);
+                    break;
+                default:
+                    if (!userInput.equals("6")) {
+                        System.out.println("Please enter a valid input");
+                    }
+            }
+
+        } while (!userInput.equals("6"));
     }
 
     public static void printPet() {
@@ -469,11 +579,83 @@ public class Main {
     public static void editVaccine() {
         Scanner scan = new Scanner(System.in);
         String userInput = "";
+
+        System.out.println(line);
+        System.out.println("Please enter the vaccine ID of the vaccine you are looking for");
+        String vacID = scan.nextLine();
+        int index = -1;
+        do {
+            index = findVaccine(vacID);
+            if (index == -1) {
+                System.out.println("Please enter a valid vaccine ID, if you wish to exit please enter y");
+                vacID = scan.nextLine().toLowerCase();
+                if (vacID.equals("y")) {
+                    return;
+                }
+            }
+        } while (index == -1);
         do {
             System.out.println(line);
-
+            System.out.println("Which element would you like to change for the vaccine");
+            System.out.println("1. Name of Vaccine");
+            System.out.println("2. Type of Pet");
+            System.out.println("3. Expiration Date");
+            System.out.println("4. Weight Requirement");
+            System.out.println("5. Dosage Ml");
+            System.out.println("6. Exit");
             userInput = scan.nextLine();
-        } while (!userInput.equals("y"));
+            String newVal;
+            double newVal2;
+            boolean isValid = false;
+            switch(userInput) {
+                case "1":
+                    System.out.println("Please enter the new vaccine name");
+                    newVal = scan.nextLine();
+                    vaccineList.get(index).setNameOfVaccine(newVal);
+                    break;
+                case "2":
+                    System.out.println("Please enter the new type of pet");
+                    newVal = scan.nextLine();
+                    vaccineList.get(index).setTypeOfPet(newVal);
+                    break;
+                case "3":
+                    System.out.println("Please enter the expiration date");
+                    newVal = scan.nextLine();
+                    vaccineList.get(index).setExpirationDate(newVal);
+                    break;
+                case "4":
+                    System.out.println("Please enter the new weight requirement");
+                    while (!isValid) {
+                        try {
+                            newVal2 = scan.nextDouble();
+                            isValid = true;
+                            vaccineList.get(index).setWeightRequirement(newVal2);
+                        } catch (InputMismatchException e) {
+                            System.out.println("Please enter a valid number");
+                        }
+                        scan.nextLine();
+                    }
+                    break;
+                case "5":
+                    System.out.println("Please enter the new dosage Ml");
+                    while (!isValid) {
+                        try {
+                            newVal2 = scan.nextDouble();
+                            isValid = true;
+                            vaccineList.get(index).setDosageMl(newVal2);
+                        } catch (InputMismatchException e) {
+                            System.out.println("Please enter a valid number");
+                        }
+                        scan.nextLine();
+                    }
+                    break;
+                default:
+                    if (!userInput.equals("6")) {
+                    System.out.println("Please enter a valid input");
+                    }
+            }
+
+        } while (!userInput.equals("6"));
     }
 
     public static void printVaccine() {
@@ -538,11 +720,97 @@ public class Main {
     public static void editAdoption() {
         Scanner scan = new Scanner(System.in);
         String userInput = "";
+
+        System.out.println(line);
+        int finalIndex = -1;
+        int adoIndex = -1;
+        int petIndex = -1;
+        int cusIndex = -1;
+
+        do {
+
+            String adoId = "";
+            String petId = "";
+            String cusId = "";
+
+            System.out.println("Please enter the Adoption ID of the customer you are looking for");
+            adoId = scan.nextLine();
+
+            System.out.println("Please enter the Pet ID of the customer you are looking for");
+            do {
+                petId = scan.nextLine();
+                petIndex = findPet(petId);
+
+                if (petIndex == -1) {
+                    System.out.println("Please enter a valid Pet ID");
+                }
+            } while (petIndex == -1);
+
+            System.out.println("Please enter the Customer ID of the customer you are looking for");
+            do {
+                cusId = scan.nextLine();
+
+                cusIndex = findCustomer(cusId);
+
+                if (cusIndex == -1) {
+                    System.out.println("Please enter a valid Customer ID");
+                }
+            } while (cusIndex == -1);
+
+            finalIndex = findAdoption(adoId, petId, cusId);
+
+            if (finalIndex == -1) {
+                System.out.println("Please enter a valid Adoption ID and a valid Adoption ID, Customer ID, and Pet ID combo. If you wish to continue please enter n, if you wish to exit enter y");
+                userInput = scan.nextLine().toLowerCase();
+
+                if (userInput.equals("y")) {
+                    return;
+                }
+            }
+
+        } while (finalIndex == -1);
+
         do {
             System.out.println(line);
-
+            System.out.println("Which element would you like to change for the adoption");
+            System.out.println("1. Pickup Date");
+            System.out.println("2. Adoption Agreement");
+            System.out.println("3. Adoption Cost");
+            System.out.println("4. Exit");
             userInput = scan.nextLine();
-        } while (!userInput.equals("y"));
+            String newVal;
+            double newVal2;
+            boolean isValid = false;
+            switch(userInput) {
+                case "1":
+                    System.out.println("Please enter the new pickup date");
+                    newVal = scan.nextLine();
+                    adoptionList.get(finalIndex).setPickUpDate(newVal);
+                    break;
+                case "2":
+                    System.out.println("Please enter the new adoption agreement");
+                    newVal = scan.nextLine();
+                    adoptionList.get(finalIndex).setAdoptionAgreement(newVal);
+                    break;
+                case "3":
+                    while (!isValid) {
+                        try {
+                            newVal2 = scan.nextDouble();
+                            isValid = true;
+                            adoptionList.get(finalIndex).setAdoptionCost(newVal2);
+                        } catch (InputMismatchException e) {
+                            System.out.println("Please enter a valid number");
+                        }
+                        scan.nextLine();
+                    }
+                    break;
+                default:
+                    if (!userInput.equals("4")) {
+                        System.out.println("Please enter a valid option");
+                    }
+            }
+
+        } while (!userInput.equals("4"));
     }
 
     public static void printAdoption() {
@@ -596,11 +864,75 @@ public class Main {
     public static void editPetVaccination() {
         Scanner scan = new Scanner(System.in);
         String userInput = "";
+
+        System.out.println(line);
+        int finalIndex = -1;
+        int empIndex = -1;
+        int vacIndex = -1;
+        String vacID;
+        String empID;
+        do {
+            System.out.println("Please enter the employee ID of the Pet Vaccination you are looking for");
+            do {
+                empID = scan.nextLine();
+                empIndex = findCaretaker(empID);
+                if (empIndex == -1) {
+                    System.out.println("Please enter a valid employee ID");
+                }
+            } while (empIndex == -1);
+
+            System.out.println("Please enter the vaccine ID of the Pet Vaccination you are looking for");
+            do {
+                vacID = scan.nextLine();
+                vacIndex = findVaccine(vacID);
+                if (vacIndex == -1) {
+                    System.out.println("Please enter a valid employee ID");
+
+                }
+            } while (vacIndex == -1);
+
+            finalIndex = findPetVaccination(empID, vacID);
+            if (finalIndex == -1) {
+                System.out.println("Please enter a valid employee ID and vaccine ID combo. If you wish to continue enter n, if you wish to exit please enter y");
+                userInput = scan.nextLine().toLowerCase();
+                if (userInput.equals("y")) {
+                    return;
+                }
+            }
+        } while (finalIndex == -1);
+
         do {
             System.out.println(line);
-
+            System.out.println("Which element would you like to change for the customer");
+            System.out.println("1. Date Administered");
+            System.out.println("2. Next Due Date");
+            System.out.println("3. Notes");
+            System.out.println("4. Exit");
             userInput = scan.nextLine();
-        } while (!userInput.equals("y"));
+            String newVal;
+            switch(userInput) {
+                case "1":
+                    System.out.println("Please enter the new date administered");
+                    newVal = scan.nextLine();
+                    petVaccineList.get(finalIndex).setDateAdministered(newVal);
+                    break;
+                case "2":
+                    System.out.println("Please enter the new next due date");
+                    newVal = scan.nextLine();
+                    petVaccineList.get(finalIndex).setNextDueDate(newVal);
+                    break;
+                case "3":
+                    System.out.println("Please enter the new notes");
+                    newVal = scan.nextLine();
+                    petVaccineList.get(finalIndex).setNotes(newVal);
+                    break;
+                default:
+                    if (!userInput.equals("4")) {
+                        System.out.println("Please enter a valid option");
+                    }
+            }
+
+        } while (!userInput.equals("4"));
     }
 
     public static void printPetVaccination() {
@@ -608,5 +940,63 @@ public class Main {
             System.out.println(petVaccination);
         }
     }
+
+    public static int findCustomer(String cusID) {
+        for (int i = 0; i < customerList.size(); i++) {
+            if (customerList.get(i).getCustomerID().equalsIgnoreCase(cusID)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int findAdoption(String adoID, String petID, String cusID) {
+        for (int i = 0; i < adoptionList.size(); i++) {
+            if (adoptionList.get(i).getAdoptionID().equalsIgnoreCase(adoID)
+                    && adoptionList.get(i).getPetID().equalsIgnoreCase(petID)
+                    && adoptionList.get(i).getCustomerID().equalsIgnoreCase(cusID)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int findPet(String petID) {
+        for (int i = 0; i < petList.size(); i++) {
+            if (petList.get(i).getPetID().equalsIgnoreCase(petID)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int findCaretaker(String empID) {
+        for (int i = 0; i < caretakerList.size(); i++) {
+            if (caretakerList.get(i).getEmployeeID().equalsIgnoreCase(empID)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int findPetVaccination(String empID, String vacID) {
+        for (int i = 0; i < petVaccineList.size(); i++) {
+            if (petVaccineList.get(i).getEmployeeID().equalsIgnoreCase(empID)
+                    && petVaccineList.get(i).getVaccineID().equalsIgnoreCase(vacID)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int findVaccine(String vacID) {
+        for (int i = 0; i < vaccineList.size(); i++) {
+            if (vaccineList.get(i).getVaccineID().equalsIgnoreCase(vacID)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }
 
