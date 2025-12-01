@@ -1,44 +1,55 @@
 package com.readingbackend.Backend.book;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @RestController
+@RequestMapping(path="api/v1/book")
 public class BookController {
+    private final BookService bookService;
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
-    private String key = "AIzaSyAHfF-z4fJocywdgL0XiaNRMWroT83idxk";
-    private WebClient webClient = WebClient.builder().baseUrl("https://www.googleapis.com/books/v1").build();
+    private final String key = "AIzaSyAHfF-z4fJocywdgL0XiaNRMWroT83idxk";
+    private final WebClient webClient = WebClient.builder().baseUrl("https://www.googleapis.com/books/v1").build();
 
     @GetMapping(value = "/searchTitle")
-    public Mono<Book> searchBooksByTitle(@RequestParam String value) {
+    public Mono<BookResponse> searchBooksByTitle(@RequestParam String value) {
         String url = String.format("/volumes?q=intitle:%s&key=%s", value, key);
 
         return webClient.get().uri(url)
                 .retrieve()
-                .bodyToMono(Book.class);
+                .bodyToMono(BookResponse.class);
 
     }
 
     @GetMapping(value = "/searchAuthor")
-    public Mono<Book> searchBooksByAuthor(@RequestParam String value) {
+    public Mono<BookResponse> searchBooksByAuthor(@RequestParam String value) {
         String url = String.format("/volumes?q=inauthor:%s&key=%s", value, key);
 
         return webClient.get().uri(url)
                 .retrieve()
-                .bodyToMono(Book.class);
+                .bodyToMono(BookResponse.class);
 
     }
 
-    public Mono<Book> searchBooksBySubject(@RequestParam String value) {
+    @GetMapping(value = "/searchSubject")
+    public Mono<BookResponse> searchBooksBySubject(@RequestParam String value) {
         String url = String.format("/volumes?q=insubject:%s&key=%s", value, key);
 
         return webClient.get().uri(url)
                 .retrieve()
-                .bodyToMono(Book.class);
+                .bodyToMono(BookResponse.class);
 
+    }
+
+    @PostMapping
+    public ResponseEntity<Book> addBook(@RequestBody Book book) {
+        Book createdBook = bookService.addBook(book);
+        return new ResponseEntity<>(createdBook, HttpStatus.CREATED);
     }
 
 }
