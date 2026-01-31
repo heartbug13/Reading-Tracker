@@ -27,3 +27,8 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+Backend/.env
+Frontend/src/util/constraints.js
+/Frontend/src/util
+Frontend/src/util/constraints.js
+Frontend/src/util/constraints.js

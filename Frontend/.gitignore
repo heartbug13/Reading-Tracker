@@ -22,3 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+/Users/samanthagrief/Documents/GitHub/Reading-Tracker/Frontend/src/util

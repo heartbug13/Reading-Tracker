@@ -1,36 +1,30 @@
-import React/*, { useEffect, useState } */from 'react'
-//import reactLogo from './assets/react.svg'
-//import viteLogo from '/vite.svg'
+import React from 'react'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import './App.css'
-//import axios from 'axios';
-import Search from './components/Search.jsx'
+import Search from './components/Search/index.jsx'
+import Home from './components/Home/index.jsx'
+import BookData from './components/BookData/index.jsx'
+import Layout from './components/Layout/index.jsx'
+import Login from "./components/Login/index.jsx";
+import ReadingList from "./components/ReadingList/index.jsx";
 
 function App() {
-    /*
-    const [data, setData] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
-
-    useEffect(() => {
-        axios.get("https://jsonplaceholder.typicode.com//posts")
-            .then((response) => {
-                setData(response.data)
-                setLoading(false)
-            })
-            .catch((err) => {
-                setError(err.message)
-                setLoading(false)
-            })
-    }, [])
-
-    if (loading) return <div>Loading...</div>
-    if (error) return <div>Error: {error}</div>
-*/
     return (
         <>
-        <div>
-            <Search />
-        </div>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Layout />}>
+                        {/*
+                        <Route index element={<Home />} />
+                        <Route path="/search" element={<Search />} />
+                        */}
+                        <Route index element={<Search />} />
+                        <Route path="/data" element={<BookData />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/reading-list" element={<ReadingList />}/>
+                    </Route>
+                </Routes>
+            </BrowserRouter>
         </>
     )
 

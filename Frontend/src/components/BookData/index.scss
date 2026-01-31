@@ -1,0 +1,150 @@
+.search-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+  gap: 1rem;
+}
+
+.pagination-btn {
+  padding: 0.7rem 2rem;
+  border: none;
+  border-radius: 2rem;
+}
+
+.disabled {
+  background-color: #E2E2E2;
+}
+
+.enabled {
+  background-color: #C9ADA7;
+}
+
+.all-books {
+  gap: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#search-books {
+  justify-content: center;
+}
+
+.book-div {
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  width: 200px;
+  padding: 15px;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#book-img {
+  justify-content: center;
+}
+
+.book-info {
+  text-align: left;
+  font-weight: 300;
+}
+
+.book-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.book-img-container {
+  display: flex;
+  width: 20%;
+  align-items: center;
+ }
+
+.book-info-container {
+  width: 60%;
+}
+
+.book-btn-container {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.book-btn-container button {
+  width: 100%;
+  padding-block: 0.6rem;
+  background-color: white;
+  border-radius: 8px;
+  border: solid #98695D;
+  color: #98695D;
+}
+
+.book-btn-container button:hover {
+  background-color: #98695D;
+  color: white;
+}
+
+
+.book-author {
+  font-size: 12px;
+}
+
+.category-box {
+  background-color: #4A4E69;
+  width: fit-content;
+  padding: 0.5rem 1.3rem;
+  border-radius: 20px;
+  color: white;
+}
+
+.category-box, .book-info-container p {
+  font-size: 16px;
+}
+
+.book-info-container h2 {
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.book-info-container h1 {
+  font-size: 40px;
+  font-weight: normal;
+}
+
+#book-back-btn {
+  border: none;
+  margin-bottom: 1.5rem;
+  padding: 0.8rem 4rem;
+  background-color: #F2E9E4;
+  border-radius: 20px;
+}
+
+#book-back-btn:hover {
+  background-color: #EBCEBE;
+}
+
+@media (max-width: 1000px) {
+  .book-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .category-container {
+    display: flex;
+    justify-content: center;
+  }
+}
