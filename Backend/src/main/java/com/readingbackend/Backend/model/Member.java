@@ -27,18 +27,6 @@ public class Member {
     public String username;
     @Column(name = "password", nullable = false)
     public String password;
-    @Column(name = "verificationcode")
-    public String verificationCode;
-    @Column(name = "verificationexpiration")
-    public Date  verificationExpiration;
-    @Column(name = "enabled")
-    public boolean enabled;
-    @Column(name = "firstname")
-    public String firstname;
-    @Column(name = "lastname")
-    public String lastname;
-    @Column(name = "phone")
-    public String phone;
 
     public Member(String username, String email, String password) {
         this.username = username;

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import "./index.scss";
 import {AppContext} from "../../context/AppContext.jsx";
 import {assets} from "../../assets/assets.js";

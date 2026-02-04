@@ -2,43 +2,42 @@ import React, {useContext, useEffect, useState} from 'react';
 import "./index.scss";
 import axios from 'axios';
 import {AppContext} from "../../context/AppContext.jsx";
+import {toast} from "react-toastify";
 
 
 const ReadingList = () => {
 
-    const {backendURL, userData} = useContext(AppContext)
+    const {backendURL, userData, isLoggedIn} = useContext(AppContext)
     const [readingList, setReadingList] = useState([])
     const [status, setStatus] = useState("")
-    //const navigate = useNavigate();
 
     const handleFilterChange = (event) => {
         setStatus(event.target.value)
     };
 
     const handleStatusChange = (value, key) => {
-        console.log(value)
-        console.log(key)
 
         axios.put(`${backendURL}/member_book`, {bookId: key, userId: userData.userid, status: value})
             .then(response => {
                 console.log(response)
             })
             .catch(error => {
-                console.log(error)
+                alert(error)
             })
     }
 
     useEffect(() => {
-
+        if (isLoggedIn) {
         axios.get(`${backendURL}/member_book?userId=${userData.userid}&status=${status}`)
             .then(response => {
                 setReadingList(response.data)
             })
             .catch(error => {
-                console.log(error)
+                toast.error(error.message)
             })
+        }
 
-    }, [backendURL, userData, status])
+    }, [backendURL, userData, status, isLoggedIn])
 
     return (
         <>

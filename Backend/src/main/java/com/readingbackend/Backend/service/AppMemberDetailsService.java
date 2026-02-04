@@ -2,7 +2,9 @@ package com.readingbackend.Backend.service;
 
 import com.readingbackend.Backend.model.Member;
 import com.readingbackend.Backend.repository.MemberRepository;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.NullMarked;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,9 +17,10 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 public class AppMemberDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;
-
+    @NonNull
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(@NonNull String email) throws UsernameNotFoundException {
+        System.out.println("this is loading a user by email");
         Member existingMember = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Email not found for the email " + email));
         return new User(existingMember.getEmail(), existingMember.getPassword(), new ArrayList<>());

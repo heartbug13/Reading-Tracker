@@ -8,15 +8,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import reactor.netty.http.Cookies;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -68,6 +65,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
                 email = jwtService.extractEmail(jwt);
                 if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                    System.out.println(response);
                     UserDetails userDetails = appMemberDetailsService.loadUserByUsername(email);
                     if (jwtService.validateToken(jwt, userDetails)) {
                         UsernamePasswordAuthenticationToken authenticationToken =
@@ -80,7 +78,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         } catch (ExpiredJwtException exception){
             String isRefreshToken = request.getHeader("isRefreshToken");
             String requestURL = request.getRequestURL().toString();
-            // allow for Refresh Token creation if following conditions are true.
+
             if (isRefreshToken != null && isRefreshToken.equals("true") && requestURL.contains("refreshtoken")) {
                 allowForRefreshToken(exception, request);
             }

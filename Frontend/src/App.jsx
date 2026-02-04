@@ -2,7 +2,6 @@ import React from 'react'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import './App.css'
 import Search from './components/Search/index.jsx'
-import Home from './components/Home/index.jsx'
 import BookData from './components/BookData/index.jsx'
 import Layout from './components/Layout/index.jsx'
 import Login from "./components/Login/index.jsx";
@@ -14,10 +13,6 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Layout />}>
-                        {/*
-                        <Route index element={<Home />} />
-                        <Route path="/search" element={<Search />} />
-                        */}
                         <Route index element={<Search />} />
                         <Route path="/data" element={<BookData />} />
                         <Route path="/login" element={<Login />} />

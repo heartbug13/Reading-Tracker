@@ -1,15 +1,14 @@
 package com.readingbackend.Backend.responses;
 
 import com.readingbackend.Backend.model.Book;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
+@Setter
 public class MemberBookPostRequest {
     private Long userId;
     private Book book;

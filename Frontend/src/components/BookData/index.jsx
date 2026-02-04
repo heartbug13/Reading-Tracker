@@ -39,10 +39,6 @@ const BookData = () => {
         checkIndex()
     })
 
-    useEffect(() => {
-        console.log(userData)
-    })
-
     const handleNextButtonClick = () => {
         setIndex(index + 10)
 
@@ -57,17 +53,13 @@ const BookData = () => {
         const books = data.items;
         const book = books.find(b => b.id === key)
         if (!book) {
-            setError("error retrieving book")
+            alert("error retrieving book")
         } else {
             setIsViewingBook(true);
             setCurrentBook(book)
         }
 
     }
-
-    useEffect(() => {
-        console.log(userData)
-    })
 
     const handleAddToReadingListClick = async() => {
 
@@ -81,10 +73,10 @@ const BookData = () => {
                     author: currentBook?.volumeInfo?.authors[0]
                 }})
                 .then(response => {
-                    console.log(response)
+                    alert(`${currentBook?.volumeInfo?.title} added to your reading list :)`)
                 })
                 .catch(error => {
-                    console.log(error)
+                    alert(error)
                 })
         } else {
             alert("Please log in before adding books to your reading list")

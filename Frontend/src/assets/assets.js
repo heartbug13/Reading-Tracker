@@ -1,4 +1,4 @@
-import person_icon from './person_icon.png';
+import person_icon from './user.svg';
 
 export const assets = {
     person_icon

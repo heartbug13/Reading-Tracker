@@ -30,11 +30,6 @@ const Search = () => {
                     onChange={handleSearchChange}
                 />
 
-                {/*
-                <button id="advanced-search-btn">
-                    Advanced Search
-                </button>*/}
-
                 <button
                     onClick={handleGoButtonClick}
                     id="submit"

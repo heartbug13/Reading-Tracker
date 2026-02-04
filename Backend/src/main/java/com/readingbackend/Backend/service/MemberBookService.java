@@ -29,16 +29,6 @@ public class MemberBookService {
     public List<MemberBookDto> getMemberBook(Long userId) {
         List<Object[]> result = memberBookRepository.findBookByUserId(userId);
 
-        result.stream()
-                .forEach(row -> {
-                    if (row[4] == null) {
-                        System.out.println("FOUND NULL row[4]");
-                    } else {
-                        System.out.println("row[4] = " + row[4]);
-                    }
-                });
-
-
         return result.stream()
                 .map(row -> new MemberBookDto(row[0].toString(), row[1].toString(), row[2].toString(), row[3].toString(), row[4].toString()))
                 .toList();
