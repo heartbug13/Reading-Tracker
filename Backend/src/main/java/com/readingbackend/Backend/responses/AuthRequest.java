@@ -2,6 +2,7 @@ package com.readingbackend.Backend.responses;
 
 import lombok.*;
 
+@Getter
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -9,4 +10,5 @@ import lombok.*;
 public class AuthRequest {
     private String email;
     private String password;
+
 }

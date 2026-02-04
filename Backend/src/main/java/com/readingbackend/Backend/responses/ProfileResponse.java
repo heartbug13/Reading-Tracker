@@ -13,6 +13,6 @@ public class ProfileResponse {
     private Long userid;
     private String name;
     private String email;
-    //private Boolean isAccountVerified;
+
 }
 

@@ -15,6 +15,8 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Member {
 
     @Id
@@ -34,4 +36,19 @@ public class Member {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Long getUserid() {
+        return userid;
+    }
+
+    public String getUsername() {
+        return username;
+    }
 }

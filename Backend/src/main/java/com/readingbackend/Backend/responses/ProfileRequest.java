@@ -10,8 +10,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
 @Setter
+@Getter
 public class ProfileRequest {
 
     @NotBlank(message = "Username should be not empty")

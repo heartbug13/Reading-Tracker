@@ -12,4 +12,5 @@ public class MemberBookPutRequest {
     private String bookId;
     private Long userId;
     private String status;
+
 }
