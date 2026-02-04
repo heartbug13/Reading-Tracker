@@ -1,3 +1,4 @@
 export const AppConstraints = {
-    BACKEND_URL: 'http://localhost:8080/api/v1'
+    BACKEND_URL: 'https://reading-tracker-backend-lrsk.onrender.com/api/v1'
+
 }

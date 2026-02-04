@@ -7,8 +7,6 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Entity
-@Getter
-@Setter
 @IdClass(MemberBookId.class)
 @Table(name = "member_book")
 public class MemberBook {
@@ -38,4 +36,27 @@ public class MemberBook {
         this.status = status;
     }
 
+    public String getBookId() {
+        return bookId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

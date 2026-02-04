@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Getter
 @Setter
 @Table(name="book")
 public class Book {
@@ -35,6 +34,22 @@ public class Book {
         this.bookTitle = bookTitle;
         this.coverUrl = coverUrl;
         this.author = author;
+    }
+
+    public String getBookId() {
+        return bookId;
+    }
+
+    public String getBookTitle() {
+        return bookTitle;
+    }
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public String getAuthor() {
+        return author;
     }
 
     @Override

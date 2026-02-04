@@ -5,22 +5,22 @@ import com.readingbackend.Backend.model.Member;
 import com.readingbackend.Backend.repository.MemberRepository;
 import com.readingbackend.Backend.responses.ProfileRequest;
 import com.readingbackend.Backend.responses.ProfileResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
-
 @Service
-@RequiredArgsConstructor
 public class ProfileServiceImpl implements ProfileService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+
+    public ProfileServiceImpl(MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
+        this.memberRepository = memberRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public ProfileResponse createProfile(ProfileRequest request) {
@@ -40,18 +40,10 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     private ProfileResponse convertToProfileResponse(Member newProfile) {
-        return ProfileResponse.builder()
-                .name(newProfile.getUsername())
-                .email(newProfile.getEmail())
-                .userid(newProfile.getUserid())
-                .build();
+        return new ProfileResponse(newProfile.getUserid(), newProfile.getUsername(), newProfile.getEmail());
     }
 
     private Member convertToUserEntity(ProfileRequest request) {
-        return Member.builder()
-                .email(request.getEmail())
-                .username(request.getUsername())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .build();
+        return new Member(request.getUsername(), request.getEmail(), passwordEncoder.encode(request.getPassword()));
     }
 }

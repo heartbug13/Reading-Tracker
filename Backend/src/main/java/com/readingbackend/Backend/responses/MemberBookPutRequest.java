@@ -4,13 +4,26 @@ import lombok.*;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
-@Getter
 @Setter
 public class MemberBookPutRequest {
     private String bookId;
     private Long userId;
     private String status;
 
+    public MemberBookPutRequest() {
+
+    }
+
+    public String getBookId() {
+        return bookId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 }

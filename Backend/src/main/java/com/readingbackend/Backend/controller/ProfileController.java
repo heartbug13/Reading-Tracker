@@ -10,12 +10,14 @@ import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping(path="api/v1/profile")
 public class ProfileController {
 
     private final ProfileService profileService;
-    //private final EmailService emailService;
+
+    public ProfileController(ProfileService profileService) {
+        this.profileService = profileService;
+    }
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)

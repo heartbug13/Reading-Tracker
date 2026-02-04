@@ -26,7 +26,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping(path="api/v1/auth")
 public class AuthController {
 
@@ -35,7 +34,12 @@ public class AuthController {
 
     private final JwtService jwtService;
 
-    private final ProfileService profileService;
+
+    public AuthController(AuthenticationManager authenticationManager, AppMemberDetailsService appMemberDetailsService, JwtService jwtService) {
+        this.authenticationManager = authenticationManager;
+        this.appMemberDetailsService = appMemberDetailsService;
+        this.jwtService = jwtService;
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest request) {

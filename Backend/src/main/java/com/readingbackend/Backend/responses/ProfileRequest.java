@@ -7,11 +7,8 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @Setter
-@Getter
 public class ProfileRequest {
 
     @NotBlank(message = "Username should be not empty")
@@ -24,4 +21,24 @@ public class ProfileRequest {
     @Size(min = 6, message = "Password must be atleast 6 characters")
     private String password;
 
+    public ProfileRequest() {
+    }
+
+    public ProfileRequest(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }

@@ -14,9 +14,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-@RequiredArgsConstructor
 public class AppMemberDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;
+
+    public AppMemberDetailsService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
     @NonNull
     @Override
     public UserDetails loadUserByUsername(@NonNull String email) throws UsernameNotFoundException {

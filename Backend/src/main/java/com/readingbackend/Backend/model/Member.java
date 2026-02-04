@@ -12,10 +12,6 @@ import java.util.List;
 @Entity
 @Table(name = "member")
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
 @Setter
 public class Member {
 
@@ -30,6 +26,9 @@ public class Member {
     @Column(name = "password", nullable = false)
     public String password;
 
+    public Member() {
+
+    }
     public Member(String username, String email, String password) {
         this.username = username;
         this.email = email;

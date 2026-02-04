@@ -27,10 +27,13 @@ export const AppContextProvider = (props) => {
                 localStorage.setItem("userData", JSON.stringify(response.data));
 
             } else {
-                toast.error("Unable to retrieve profile");
+                console.log("testing")
+                alert("Unable to retrieve profile");
             }
         }catch(error) {
-            toast.error(error.message);
+            console.log(error)
+            console.log("testing again")
+            console.log(error.message)
         }
     }
 
@@ -40,12 +43,15 @@ export const AppContextProvider = (props) => {
                 const response = await axios.get(backendURL + "/auth/is-authenticated");
 
                 if (response.status === 200 && response.data === true) {
+                    console.log("the user is authenticated")
                     setIsLoggedIn(true);
                 } else {
+                    console.log("the user is not authenticatied")
                     setIsLoggedIn(false);
                     setUserData(null);
                 }
             } catch (error) {
+                console.log(error)
                 toast.error(error.message)
             }
         };

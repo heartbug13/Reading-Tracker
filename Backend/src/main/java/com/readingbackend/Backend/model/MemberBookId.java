@@ -6,8 +6,6 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Getter
-@Setter
 public class MemberBookId implements Serializable {
     private String bookId;
     private Long userId;
@@ -18,6 +16,14 @@ public class MemberBookId implements Serializable {
     public MemberBookId(String bookId, Long userId) {
         this.bookId = bookId;
         this.userId = userId;
+    }
+
+    public String getBookId() {
+        return bookId;
+    }
+
+    public Long getUserId() {
+        return userId;
     }
 
     @Override
