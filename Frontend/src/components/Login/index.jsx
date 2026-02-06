@@ -1,11 +1,6 @@
-/*
-import {Link, useNavigate} from "react-router-dom";
-import {assets} from "../assets/assets.js";
- */
-import {React, useContext, useState} from "react";
+
+import React, {useContext, useState} from "react";
 import axios from "axios";
-//import {AppContext} from "../context/AppContext.jsx";
-//import {toast} from "react-toastify";
 import "./index.scss";
 import {AppContext} from "../../context/AppContext.jsx";
 import {useNavigate} from "react-router-dom";
@@ -16,6 +11,7 @@ const Login = () => {
     const [isCreateAccount, setIsCreateAccount] = useState(false);
 
     const [username, setUsername] = useState("");
+    const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const {backendURL, setIsLoggedIn, getUserData} = useContext(AppContext);
@@ -29,9 +25,10 @@ const Login = () => {
         axios.defaults.withCredentials = true;
 
         if (isCreateAccount) {
-
+            setLoading(true)
             axios.post(`${backendURL}/profile/register`, {username, email, password})
                 .then(() => {
+                    setLoading(false)
                     setIsActive(false)
                     navigate("/")
                 })
@@ -42,9 +39,10 @@ const Login = () => {
 
 
         } else {
-
+            setLoading(true)
             axios.post(`${backendURL}/auth/login`, {email, password})
                 .then(() => {
+                    setLoading(false)
                     setIsActive(false)
                     setIsLoggedIn(true)
                     getUserData()
@@ -116,16 +114,17 @@ const Login = () => {
                 <button
                     type={"submit"}
                     id={"submit-btn"}
+                    disabled={loading}
                     onClick={(event) => onSubmitHandler(event)}
                 >
-                    Submit
+                    {loading ? "Loading" : "Submit"}
                 </button>
             </div>
 
             {isCreateAccount ? (
                 <p>Already have an account? <a onClick={() => setIsCreateAccount(false)}>Log In</a></p>
             ) : (
-                <p>Don’t have an account? <a onClick={() => setIsCreateAccount(true)} >Create one</a></p>
+                <p>Don’t have an account? <a onClick={() => setIsCreateAccount(true)}>Create one</a></p>
             )}
 
         </form>

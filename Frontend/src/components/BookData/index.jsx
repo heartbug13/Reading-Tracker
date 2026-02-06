@@ -6,13 +6,14 @@ import {AppContext} from "../../context/AppContext.jsx";
 const BookData = () => {
 
     const [data, setData] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
+    const [loading, setLoading] = useState(true);
+    const [addingBookLoading, setAddingBookLoading] = useState(false);
+    const [error, setError] = useState(null);
     const {backendURL, isLoggedIn, userData} = useContext(AppContext);
 
     const params = new URLSearchParams(window.location.search);
-    const searchValue = params.get('search')
-    const searchType = params.get('advancedSearch')
+    const searchValue = params.get('search');
+    const searchType = params.get('advancedSearch');
 
     const [index, setIndex] = useState(0);
     const [totalResult, setTotalResult] = useState(0);
@@ -64,6 +65,7 @@ const BookData = () => {
     const handleAddToReadingListClick = async() => {
 
         if (isLoggedIn) {
+            setAddingBookLoading(true)
             axios.post(`${backendURL}/member_book`, {
                 userId: userData.userid,
                 book: {
@@ -72,7 +74,8 @@ const BookData = () => {
                     coverUrl: currentBook?.volumeInfo?.imageLinks?.thumbnail,
                     author: currentBook?.volumeInfo?.authors[0]
                 }})
-                .then(response => {
+                .then(() => {
+                    setAddingBookLoading(false)
                     alert(`${currentBook?.volumeInfo?.title} added to your reading list :)`)
                 })
                 .catch(error => {
@@ -145,7 +148,9 @@ const BookData = () => {
 
                             </div>
                             <div className={"book-btn-container"}>
-                                <button onClick={handleAddToReadingListClick}>Add to Reading List</button>
+                                <button disabled={addingBookLoading} onClick={handleAddToReadingListClick}>
+                                    {addingBookLoading ? "Loading" : "Add to Reading List"}
+                                </button>
                                 <a target="_blank" href={currentBook?.volumeInfo?.previewLink}>
                                     <button>Preview Book</button>
                                 </a>

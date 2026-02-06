@@ -56,14 +56,6 @@ public class BookController {
 
     }
 
-    /*
-    @GetMapping(value = "/getBook")
-    public Book getBook(@RequestParam String id) {
-        return bookService.getBook(id);
-    }
-
-     */
-
     @GetMapping(value = "/getBook")
     public Mono<BookResponse> getBook(@RequestParam String id) {
         String url = String.format("/volumes/%s", id);
