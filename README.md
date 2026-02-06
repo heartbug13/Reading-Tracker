@@ -2,6 +2,9 @@
 
 A full‑stack web application that helps users organize their personal library and track reading progress. Users can add books, update pages read, and categorize titles as **Not Read**, **Readings**, or **Read** through a clean and responsive interface.
 
+Find the tracker at <[book-log-alpha.vercel.app](https://book-log-alpha.vercel.app/)>
+---
+
 ---
 
 ## ✨ Features
